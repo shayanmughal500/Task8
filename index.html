@@ -1,1313 +1,1496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whitepace – Project Management & Team Collaboration</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whitepace – Get More Done</title>
 
-  <!-- Google Fonts: Manrope (matches Figma design) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
-  <!-- Bootstrap 5 CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
 
   <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
 
   <style>
-    /* ─── CSS Variables ─── */
+    /* ═══════════════════════════════
+       ROOT VARIABLES — from design
+    ═══════════════════════════════ */
     :root {
-      --purple:    #4F46E5;
-      --purple-lt: #6366F1;
-      --purple-bg: #EEF2FF;
-      --purple-dk: #3730A3;
-      --green:     #22C55E;
-      --dark:      #1D2130;
-      --body-text: #525560;
-      --light-bg:  #FAFAFA;
-      --border:    #E5E7EB;
-      --white:     #FFFFFF;
+      --navy:       #0a1628;
+      --navy-mid:   #0e1f3d;
+      --blue-dark:  #1a2f5a;
+      --blue-med:   #1b3a6b;
+      --accent:     #2563EB;
+      --accent-lt:  #3b82f6;
+      --btn-blue:   #4f8ef7;
+      --text-dark:  #1a1a2e;
+      --text-body:  #4b5563;
+      --text-light: rgba(255,255,255,0.75);
+      --border:     #e5e7eb;
+      --white:      #ffffff;
+      --bg-light:   #f8fafc;
     }
 
-    /* ─── Base ─── */
+    /* ═══════════════════════════════
+       BASE
+    ═══════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Manrope', sans-serif;
-      color: var(--body-text);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-body);
       background: var(--white);
       overflow-x: hidden;
+      margin: 0;
     }
+    img { max-width: 100%; }
 
-    /* ─── Utility ─── */
-    .text-purple  { color: var(--purple) !important; }
-    .bg-purple    { background: var(--purple) !important; }
-    .bg-purple-lt { background: var(--purple-bg) !important; }
-
-    /* ─── NAVBAR ─── */
+    /* ═══════════════════════════════
+       NAVBAR
+    ═══════════════════════════════ */
     #navbar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0;
+      background: var(--navy);
+      padding: 14px 0;
       position: sticky;
       top: 0;
-      z-index: 1000;
-      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+      z-index: 999;
     }
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--dark) !important;
-      letter-spacing: -.5px;
+    .navbar-brand-logo {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      text-decoration: none;
     }
-    .navbar-brand span { color: var(--purple); }
-    .nav-link {
-      font-size: .92rem;
-      font-weight: 600;
-      color: var(--dark) !important;
+    .navbar-brand-logo i { color: var(--btn-blue); margin-right: 4px; }
+    .nav-menu .nav-link {
+      color: rgba(255,255,255,0.85) !important;
+      font-size: .85rem;
+      font-weight: 500;
       padding: 6px 14px !important;
       transition: color .2s;
     }
-    .nav-link:hover { color: var(--purple) !important; }
-    .btn-try {
-      background: var(--purple);
-      color: #fff !important;
+    .nav-menu .nav-link:hover { color: #fff !important; }
+    .btn-nav-login {
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 6px;
-      padding: 10px 22px !important;
-      font-size: .88rem;
+      padding: 7px 18px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-nav-login:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .btn-nav-try {
+      color: var(--navy);
+      font-size: .82rem;
       font-weight: 700;
+      background: #f0f7ff;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 18px;
+      text-decoration: none;
       transition: background .2s, transform .15s;
     }
-    .btn-try:hover { background: var(--purple-dk); transform: translateY(-1px); }
-    .navbar-toggler { border-color: var(--border); }
+    .btn-nav-try:hover { background: #ddeeff; transform: translateY(-1px); color: var(--navy); }
+    .navbar-toggler { border-color: rgba(255,255,255,.3); }
+    .navbar-toggler-icon { filter: invert(1); }
 
-    /* ─── HERO ─── */
+    /* ═══════════════════════════════
+       HERO — dark navy with wave bg
+    ═══════════════════════════════ */
     #hero {
-      padding: 80px 0 0;
-      background: var(--white);
+      background: var(--navy-mid);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% -20%, rgba(37,99,235,0.25) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400'%3E%3Cpath d='M0 200 Q300 100 600 200 Q900 300 1200 200' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='2'/%3E%3Cpath d='M0 250 Q300 150 600 250 Q900 350 1200 250' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='2'/%3E%3Cpath d='M0 300 Q300 200 600 300 Q900 400 1200 300' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: cover;
+      padding: 80px 0 70px;
+      position: relative;
       overflow: hidden;
     }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--purple-bg);
-      color: var(--purple);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .3px;
-      margin-bottom: 24px;
+    /* subtle concentric ring decoration top-left */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.04);
+      top: -200px; left: -200px;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.025);
+      top: -350px; left: -350px;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(79,142,247,.2);
+      color: #90b8f8;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      margin-bottom: 18px;
     }
     .hero-title {
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2rem, 4.5vw, 3rem);
       font-weight: 800;
-      color: var(--dark);
+      color: #fff;
       line-height: 1.18;
-      letter-spacing: -.8px;
-      margin-bottom: 20px;
+      letter-spacing: -.5px;
+      margin-bottom: 18px;
     }
-    .hero-title .accent { color: var(--purple); }
     .hero-subtitle {
-      font-size: 1.05rem;
-      color: var(--body-text);
-      line-height: 1.75;
-      max-width: 480px;
-      margin-bottom: 36px;
+      font-size: .92rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 32px;
     }
-    .btn-hero-primary {
-      background: var(--purple);
+    .btn-hero {
+      background: var(--btn-blue);
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 14px 28px;
-      font-size: .95rem;
+      border-radius: 6px;
+      padding: 12px 26px;
+      font-size: .88rem;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: background .2s, box-shadow .2s, transform .15s;
-      box-shadow: 0 4px 16px rgba(79,70,229,.35);
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(79,142,247,.4);
     }
-    .btn-hero-primary:hover {
-      background: var(--purple-dk);
+    .btn-hero:hover {
+      background: #3b73e0;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(79,70,229,.4);
+      box-shadow: 0 8px 24px rgba(79,142,247,.5);
       color: #fff;
     }
-    .btn-hero-secondary {
-      color: var(--dark);
-      font-size: .95rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 20px;
-      transition: color .2s;
-    }
-    .btn-hero-secondary:hover { color: var(--purple); }
-    .btn-hero-secondary .play-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--purple-bg);
+    /* Hero mockup — light blue placeholder box */
+    .hero-mockup {
+      background: rgba(79,142,247,0.18);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      min-height: 260px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .9rem;
-      color: var(--purple);
-      flex-shrink: 0;
-      transition: background .2s;
-    }
-    .btn-hero-secondary:hover .play-icon { background: var(--purple); color: #fff; }
-
-    /* Hero Dashboard Mockup */
-    .hero-mockup-wrap {
-      margin-top: 60px;
       position: relative;
-    }
-    .hero-dashboard {
-      background: #fff;
-      border-radius: 16px 16px 0 0;
-      box-shadow: 0 -4px 60px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.06);
       overflow: hidden;
-      position: relative;
     }
-    .dashboard-topbar {
-      background: var(--dark);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .db-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dashboard-body { padding: 0; }
-    .dash-sidebar {
-      background: #1E2235;
-      min-height: 380px;
-      padding: 20px 16px;
-      width: 200px;
-      flex-shrink: 0;
-    }
-    .dash-nav-item {
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: .78rem;
-      font-weight: 600;
-      color: rgba(255,255,255,.55);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .dash-nav-item.active { background: var(--purple); color: #fff; }
-    .dash-content { flex: 1; padding: 20px 24px; background: #F8F9FC; }
-    .dash-stat-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px;
-      border: 1px solid #EEF0F4;
-    }
-    .dash-stat-num {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--dark);
-      font-family: 'Manrope', sans-serif;
-    }
-    .dash-stat-label { font-size: .72rem; color: #8B9CB0; font-weight: 600; margin-top: 2px; }
-    .dash-task-row {
-      background: #fff;
-      border-radius: 8px;
-      padding: 11px 14px;
-      margin-bottom: 8px;
-      border: 1px solid #EEF0F4;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .task-check {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .6rem;
-    }
-    .task-check.done { background: var(--green); border-color: var(--green); color: #fff; }
-    .task-badge {
-      margin-left: auto;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: .68rem;
-      font-weight: 700;
-    }
-    .badge-purple { background: var(--purple-bg); color: var(--purple); }
-    .badge-orange { background: #FEF3C7; color: #D97706; }
-    .badge-green  { background: #DCFCE7; color: #16A34A; }
-
-    /* Floating cards on hero */
-    .hero-float {
+    .hero-mockup::before {
+      content: '';
       position: absolute;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.14);
-      padding: 14px 18px;
-      font-family: 'Manrope', sans-serif;
-      z-index: 10;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%);
     }
-    .hero-float.fl1 { top: 30px; left: -40px; min-width: 170px; }
-    .hero-float.fl2 { bottom: 60px; right: -30px; min-width: 160px; }
+    .mockup-inner {
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 14px 16px;
+      width: 90%;
+    }
+    .mockup-bar-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .mbar {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.15);
+    }
+    .mbar-sm { width: 60px; }
+    .mbar-md { width: 100px; }
+    .mbar-lg { flex: 1; }
+    .mbar-accent { background: rgba(79,142,247,.5); }
 
-    /* ─── BRAND LOGOS ─── */
-    #brands {
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .brand-logo {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: #9CA3AF;
-      letter-spacing: -.3px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color .2s;
-      white-space: nowrap;
-    }
-    .brand-logo:hover { color: var(--dark); }
-    .brand-logo i { font-size: 1.3rem; }
-
-    /* ─── SECTION COMMON ─── */
-    section { padding: 96px 0; }
+    /* ═══════════════════════════════
+       SECTION COMMON
+    ═══════════════════════════════ */
     .section-eyebrow {
-      font-size: .78rem;
+      font-size: .72rem;
       font-weight: 700;
-      color: var(--purple);
+      color: var(--accent);
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      color: var(--dark);
-      line-height: 1.22;
-      letter-spacing: -.5px;
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: .97rem;
-      color: var(--body-text);
-      line-height: 1.75;
-      max-width: 500px;
-    }
-
-    /* ─── FEATURES ─── */
-    #features { background: var(--light-bg); }
-    .feature-icon-wrap {
-      width: 52px; height: 52px;
-      border-radius: 12px;
-      background: var(--purple-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      color: var(--purple);
-      margin-bottom: 20px;
-      transition: background .2s;
-    }
-    .feature-card {
-      padding: 36px 28px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: #fff;
-      height: 100%;
-      transition: box-shadow .25s, transform .25s, border-color .25s;
-    }
-    .feature-card:hover {
-      box-shadow: 0 12px 40px rgba(79,70,229,.1);
-      border-color: rgba(79,70,229,.3);
-      transform: translateY(-4px);
-    }
-    .feature-card:hover .feature-icon-wrap { background: var(--purple); color: #fff; }
-    .feature-card h5 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--dark);
       margin-bottom: 10px;
     }
-    .feature-card p { font-size: .9rem; color: var(--body-text); line-height: 1.7; margin: 0; }
-
-    /* ─── HOW IT WORKS / ABOUT ─── */
-    #howitworks { background: #fff; }
-    .step-chip {
-      display: inline-block;
-      background: var(--purple-bg);
-      color: var(--purple);
-      border-radius: 6px;
-      padding: 4px 12px;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.22;
+      letter-spacing: -.4px;
       margin-bottom: 14px;
     }
-    .step-item { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 32px; }
-    .step-num {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--purple);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(79,70,229,.35);
+    .section-sub {
+      font-size: .9rem;
+      color: var(--text-body);
+      line-height: 1.72;
+      max-width: 480px;
     }
-    .step-text h6 { font-size: .97rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-    .step-text p  { font-size: .88rem; color: var(--body-text); line-height: 1.7; margin: 0; }
-
-    /* App screenshot mockup */
-    .app-mockup {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.12);
-      background: #1E2235;
-      position: relative;
-    }
-    .mockup-header {
-      background: var(--dark);
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .m-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .mockup-body { padding: 20px; }
-    .kanban-col {
-      background: rgba(255,255,255,.06);
-      border-radius: 10px;
-      padding: 14px;
-      min-height: 200px;
-    }
-    .kanban-col-title {
-      font-size: .72rem;
-      font-weight: 700;
-      color: rgba(255,255,255,.5);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .kanban-card {
-      background: rgba(255,255,255,.1);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 8px;
-      font-size: .75rem;
-      color: rgba(255,255,255,.85);
-      font-weight: 600;
-    }
-    .kanban-tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: .65rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .progress-mini {
-      height: 4px;
-      border-radius: 2px;
-      background: rgba(255,255,255,.1);
-      margin-top: 10px;
-    }
-    .progress-mini-fill { height: 100%; border-radius: 2px; }
-
-    /* ─── INTEGRATIONS ─── */
-    #integrations { background: var(--light-bg); }
-    .integration-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 767px) { .integration-grid { grid-template-columns: repeat(2, 1fr); } }
-    .integration-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px 20px;
-      text-align: center;
-      transition: box-shadow .2s, transform .2s, border-color .2s;
-      cursor: pointer;
-    }
-    .integration-card:hover {
-      box-shadow: 0 8px 30px rgba(0,0,0,.08);
-      transform: translateY(-3px);
-      border-color: var(--purple);
-    }
-    .int-icon {
-      width: 52px; height: 52px;
-      border-radius: 12px;
-      margin: 0 auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-    .integration-card h6 { font-size: .88rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-    .integration-card p  { font-size: .77rem; color: #9CA3AF; margin: 0; }
-
-    /* ─── PRICING ─── */
-    #pricing { background: #fff; }
-    .pricing-toggle {
-      background: var(--light-bg);
-      border-radius: 8px;
-      padding: 4px;
+    .btn-section {
       display: inline-flex;
-      border: 1px solid var(--border);
-    }
-    .pricing-toggle button {
-      border: none;
-      background: transparent;
-      padding: 8px 22px;
-      border-radius: 6px;
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--body-text);
-      transition: all .2s;
-      cursor: pointer;
-    }
-    .pricing-toggle button.active {
-      background: var(--purple);
+      align-items: center;
+      gap: 7px;
+      background: var(--btn-blue);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(79,70,229,.3);
-    }
-    .pricing-badge {
-      background: #FEF3C7;
-      color: #D97706;
-      border-radius: 20px;
-      padding: 3px 10px;
-      font-size: .72rem;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 22px;
+      font-size: .84rem;
       font-weight: 700;
-      margin-left: 8px;
+      text-decoration: none;
+      margin-top: 24px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-section:hover { background: #3b73e0; color: #fff; transform: translateY(-1px); }
+
+    /* ═══════════════════════════════
+       PROJECT MANAGEMENT SECTION
+    ═══════════════════════════════ */
+    #project-mgmt {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    /* Light blue placeholder box (right side) */
+    .img-placeholder {
+      background: #dbeafe;
+      border-radius: 12px;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .img-placeholder-dark {
+      background: rgba(79,142,247,0.18);
+      border-radius: 12px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ═══════════════════════════════
+       WORK TOGETHER — dots/bubbles
+    ═══════════════════════════════ */
+    #work-together {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .dots-wrap {
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dot-node {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+    /* connector lines via SVG */
+    .dots-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ═══════════════════════════════
+       USE AS EXTENSION — dark navy
+    ═══════════════════════════════ */
+    #use-extension {
+      background: var(--navy-mid);
+      background-image: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(37,99,235,.2) 0%, transparent 70%);
+      padding: 70px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #use-extension::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.04);
+      top: -200px; right: -150px;
+      pointer-events: none;
+    }
+    .ext-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .ext-title .underline-link {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      color: #fff;
+    }
+    .ext-sub {
+      font-size: .9rem;
+      color: var(--text-light);
+      line-height: 1.72;
+      max-width: 380px;
+      margin-bottom: 28px;
+    }
+
+    /* ═══════════════════════════════
+       CUSTOMISE SECTION
+    ═══════════════════════════════ */
+    #customise {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    /* ═══════════════════════════════
+       PRICING
+    ═══════════════════════════════ */
+    #pricing {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .pricing-center-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .pricing-center-sub {
+      font-size: .88rem;
+      color: var(--text-body);
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
     }
     .pricing-card {
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 32px;
+      border-radius: 16px;
+      padding: 32px 26px;
       height: 100%;
-      transition: box-shadow .25s, transform .25s;
-      position: relative;
+      border: 1.5px solid var(--border);
       background: #fff;
+      transition: box-shadow .25s, transform .25s;
     }
-    .pricing-card.popular {
-      border: 2px solid var(--purple);
-      box-shadow: 0 12px 48px rgba(79,70,229,.15);
-    }
-    .pricing-card:hover { box-shadow: 0 16px 50px rgba(0,0,0,.1); transform: translateY(-4px); }
-    .pricing-card.popular:hover { box-shadow: 0 20px 60px rgba(79,70,229,.22); }
-    .popular-label {
-      position: absolute;
-      top: -1px; right: 28px;
-      background: var(--purple);
+    .pricing-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.09); transform: translateY(-4px); }
+    .pricing-card.featured {
+      background: var(--navy);
+      border-color: var(--navy);
       color: #fff;
+      transform: scale(1.03);
+      box-shadow: 0 16px 50px rgba(10,22,40,.4);
+    }
+    .pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+    .plan-label {
       font-size: .72rem;
       font-weight: 700;
-      padding: 5px 16px;
-      border-radius: 0 0 10px 10px;
-      letter-spacing: .5px;
+      color: var(--text-body);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
-    .plan-name { font-size: .82rem; font-weight: 700; color: var(--body-text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .pricing-card.featured .plan-label { color: rgba(255,255,255,.6); }
     .plan-price {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       font-weight: 800;
-      color: var(--dark);
+      color: var(--text-dark);
       letter-spacing: -1px;
       line-height: 1;
-      margin: 12px 0 6px;
+      margin-bottom: 4px;
     }
-    .plan-price sup { font-size: 1.2rem; font-weight: 700; vertical-align: super; margin-right: 2px; }
-    .plan-period { font-size: .82rem; color: #9CA3AF; margin-bottom: 20px; }
-    .plan-desc { font-size: .88rem; color: var(--body-text); line-height: 1.65; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+    .plan-price sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+    .pricing-card.featured .plan-price { color: #fff; }
+    .plan-period { font-size: .78rem; color: #9ca3af; margin-bottom: 20px; }
+    .pricing-card.featured .plan-period { color: rgba(255,255,255,.5); }
+    .plan-divider { border-color: rgba(0,0,0,.08); margin: 16px 0; }
+    .pricing-card.featured .plan-divider { border-color: rgba(255,255,255,.12); }
     .plan-feature {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-      font-size: .88rem;
-      color: var(--dark);
+      gap: 10px;
+      font-size: .83rem;
+      color: var(--text-dark);
+      margin-bottom: 12px;
       font-weight: 500;
     }
-    .plan-feature .chk {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--purple-bg);
-      color: var(--purple);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .65rem;
-      flex-shrink: 0;
+    .pricing-card.featured .plan-feature { color: rgba(255,255,255,.85); }
+    .plan-feature i {
+      color: var(--accent);
+      font-size: .85rem;
       margin-top: 1px;
+      flex-shrink: 0;
     }
-    .plan-feature .chk.green { background: #DCFCE7; color: var(--green); }
+    .pricing-card.featured .plan-feature i { color: #90b8f8; }
+    .plan-feature.muted { opacity: .45; }
     .btn-plan {
       display: block;
       width: 100%;
       text-align: center;
-      padding: 13px;
+      padding: 12px;
       border-radius: 8px;
+      font-size: .85rem;
       font-weight: 700;
-      font-size: .9rem;
       text-decoration: none;
-      margin-top: 28px;
+      margin-top: 24px;
       transition: all .2s;
+      cursor: pointer;
     }
-    .btn-plan-outline { border: 2px solid var(--border); color: var(--dark); background: #fff; }
-    .btn-plan-outline:hover { border-color: var(--purple); color: var(--purple); }
-    .btn-plan-filled { background: var(--purple); color: #fff; border: 2px solid var(--purple); }
-    .btn-plan-filled:hover { background: var(--purple-dk); border-color: var(--purple-dk); color: #fff; }
-
-    /* ─── TESTIMONIALS ─── */
-    #testimonials { background: var(--light-bg); }
-    .testi-card {
+    .btn-plan-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text-dark);
       background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px;
-      height: 100%;
-      transition: box-shadow .25s, transform .25s;
     }
-    .testi-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.08); transform: translateY(-4px); }
-    .stars { color: #FBBF24; font-size: 1rem; letter-spacing: 2px; margin-bottom: 16px; }
-    .testi-quote {
-      font-size: .95rem;
-      color: var(--body-text);
-      line-height: 1.75;
-      margin-bottom: 24px;
-      font-style: italic;
+    .btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-plan-filled {
+      background: var(--btn-blue);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 16px rgba(79,142,247,.35);
     }
-    .testi-avatar {
-      width: 46px; height: 46px;
+    .btn-plan-filled:hover { background: #3b73e0; color: #fff; }
+
+    /* ═══════════════════════════════
+       YOUR WORK EVERYWHERE — dark navy
+    ═══════════════════════════════ */
+    #your-work {
+      background: var(--navy-mid);
+      background-image:
+        radial-gradient(ellipse 60% 80% at 50% 50%, rgba(37,99,235,.15) 0%, transparent 70%);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    /* concentric rings decoration */
+    .rings-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .ring {
+      position: absolute;
       border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.05);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .your-work-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 800;
-      font-size: 1.1rem;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .your-work-title .underline-wht {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+    .your-work-sub {
+      font-size: .92rem;
+      color: var(--text-light);
+      line-height: 1.72;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    /* ═══════════════════════════════
+       100% YOUR DATA
+    ═══════════════════════════════ */
+    #your-data {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    /* data graphic SVG placeholder */
+    .data-visual {
+      position: relative;
+      min-height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      color: #fff;
     }
-    .testi-name { font-size: .9rem; font-weight: 700; color: var(--dark); }
-    .testi-role { font-size: .78rem; color: #9CA3AF; }
 
-    /* ─── CTA BANNER ─── */
-    #cta-banner {
-      background: var(--purple);
+    /* ═══════════════════════════════
+       SPONSORS
+    ═══════════════════════════════ */
+    #sponsors {
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .sponsors-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .sponsor-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #374151;
+      opacity: .7;
+      transition: opacity .2s;
+    }
+    .sponsor-item:hover { opacity: 1; }
+    .sponsor-item i { font-size: 1.5rem; }
+
+    /* ═══════════════════════════════
+       FAVOURITE APPS — dark navy
+    ═══════════════════════════════ */
+    #fav-apps {
+      background: var(--navy-mid);
+      background-image: radial-gradient(ellipse 60% 70% at 30% 50%, rgba(37,99,235,.2) 0%, transparent 70%);
       padding: 80px 0;
       position: relative;
       overflow: hidden;
     }
-    #cta-banner::before {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.05);
-      top: -150px; right: -80px;
-    }
-    #cta-banner::after {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.04);
-      bottom: -100px; left: -60px;
-    }
-    .cta-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 14px; }
-    .cta-sub { font-size: .97rem; color: rgba(255,255,255,.8); max-width: 450px; line-height: 1.7; }
-    .btn-cta-white {
-      background: #fff;
-      color: var(--purple);
-      border: none;
-      border-radius: 8px;
-      padding: 14px 30px;
-      font-size: .92rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); color: var(--purple); }
-    .btn-cta-outline {
-      background: transparent;
+    .fav-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
       color: #fff;
-      border: 2px solid rgba(255,255,255,.4);
-      border-radius: 8px;
-      padding: 12px 28px;
-      font-size: .92rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: border-color .2s, background .2s;
+      line-height: 1.22;
+      margin-bottom: 14px;
     }
-    .btn-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); color: #fff; }
+    .fav-sub {
+      font-size: .9rem;
+      color: var(--text-light);
+      line-height: 1.72;
+      max-width: 360px;
+      margin-bottom: 28px;
+    }
+    /* Orbiting circles diagram */
+    .orbit-wrap {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto;
+    }
+    .orbit-center {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--btn-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 20px rgba(79,142,247,.5);
+      z-index: 3;
+    }
+    .orbit-ring {
+      position: absolute;
+      left: 50%; top: 50%;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,.15);
+      transform: translate(-50%,-50%);
+    }
+    .orbit-node {
+      position: absolute;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #fff;
+      backdrop-filter: blur(4px);
+    }
 
-    /* ─── FOOTER ─── */
-    #footer { background: var(--dark); padding: 64px 0 32px; }
-    .footer-brand { font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: -.5px; }
-    .footer-brand span { color: var(--purple-lt); }
-    .footer-desc { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 260px; margin-top: 12px; }
-    .footer-heading { font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.4); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 18px; }
+    /* ═══════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════ */
+    #testimonials {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .testi-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .testi-title .yellow { color: #f59e0b; }
+    .testi-sub-center {
+      text-align: center;
+      font-size: .88rem;
+      color: var(--text-body);
+      margin-bottom: 48px;
+    }
+    .testi-card {
+      border-radius: 14px;
+      padding: 28px 24px;
+      height: 100%;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .testi-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,.07); transform: translateY(-3px); }
+    .testi-card.featured-t {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .quote-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .testi-card.featured-t .quote-icon { color: var(--btn-blue); }
+    .testi-text {
+      font-size: .85rem;
+      color: var(--text-body);
+      line-height: 1.72;
+      margin-bottom: 20px;
+    }
+    .testi-card.featured-t .testi-text { color: rgba(255,255,255,.75); }
+    .testi-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      color: #fff;
+    }
+    .testi-name { font-size: .84rem; font-weight: 700; color: var(--text-dark); }
+    .testi-card.featured-t .testi-name { color: #fff; }
+    .testi-role { font-size: .74rem; color: #9ca3af; }
+    .testi-card.featured-t .testi-role { color: rgba(255,255,255,.5); }
+
+    /* ═══════════════════════════════
+       TRY WHITEPACE TODAY CTA
+    ═══════════════════════════════ */
+    #try-cta {
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(37,99,235,.2) 0%, transparent 70%);
+      padding: 90px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #try-cta::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.04);
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    #try-cta::after {
+      content: '';
+      position: absolute;
+      width: 1000px; height: 1000px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.025);
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .cta-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-sub {
+      font-size: .92rem;
+      color: var(--text-light);
+      line-height: 1.72;
+      max-width: 460px;
+      margin: 0 auto 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-btn-wrap { position: relative; z-index: 2; }
+    .or-text { font-size: .8rem; color: rgba(255,255,255,.45); margin: 14px 0 10px; }
+    .platform-icons { display: flex; justify-content: center; gap: 16px; position: relative; z-index: 2; }
+    .platform-icon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.7);
+      font-size: 1.1rem;
+      transition: background .2s;
+    }
+    .platform-icon:hover { background: rgba(255,255,255,.15); }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    #footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 60px 0 28px;
+    }
+    .footer-brand {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin-bottom: 12px;
+    }
+    .footer-brand i { color: var(--btn-blue); }
+    .footer-desc {
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.7;
+      max-width: 220px;
+      margin-bottom: 20px;
+    }
+    .footer-heading {
+      font-size: .72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.35);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
     .footer-link {
       display: block;
-      font-size: .88rem;
-      color: rgba(255,255,255,.65);
+      font-size: .83rem;
+      color: rgba(255,255,255,.6);
       text-decoration: none;
       margin-bottom: 10px;
       transition: color .2s;
     }
     .footer-link:hover { color: #fff; }
+    .footer-divider { border-color: rgba(255,255,255,.07); margin: 40px 0 22px; }
+    .footer-bottom-text { font-size: .78rem; color: rgba(255,255,255,.3); }
     .footer-social {
       display: inline-flex;
-      width: 36px; height: 36px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.07);
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,.6);
-      font-size: .95rem;
+      color: rgba(255,255,255,.55);
+      font-size: .85rem;
       text-decoration: none;
+      margin-left: 8px;
       transition: background .2s, color .2s;
-      margin-right: 8px;
     }
-    .footer-social:hover { background: var(--purple); color: #fff; }
-    .footer-divider { border-color: rgba(255,255,255,.08); margin: 48px 0 24px; }
-    .footer-bottom { font-size: .82rem; color: rgba(255,255,255,.35); }
+    .footer-social:hover { background: var(--btn-blue); color: #fff; }
+    /* Try it today box in footer */
+    .footer-try-box {
+      background: rgba(79,142,247,.12);
+      border: 1px solid rgba(79,142,247,.25);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .footer-try-title { font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
     .footer-input-wrap { position: relative; }
     .footer-input {
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 8px;
-      padding: 11px 120px 11px 16px;
+      border-radius: 6px;
+      padding: 9px 80px 9px 14px;
       color: #fff;
-      font-size: .88rem;
+      font-size: .8rem;
       width: 100%;
       outline: none;
-      transition: border-color .2s;
     }
-    .footer-input::placeholder { color: rgba(255,255,255,.35); }
-    .footer-input:focus { border-color: var(--purple-lt); }
-    .footer-subscribe {
+    .footer-input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-input:focus { border-color: var(--btn-blue); }
+    .footer-sub-btn {
       position: absolute;
       right: 4px; top: 4px;
-      background: var(--purple);
+      background: var(--btn-blue);
       color: #fff;
       border: none;
-      border-radius: 6px;
-      padding: 7px 16px;
-      font-size: .8rem;
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-size: .75rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background .2s;
     }
-    .footer-subscribe:hover { background: var(--purple-dk); }
 
-    /* ─── RESPONSIVE ─── */
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
     @media (max-width: 991px) {
-      .dash-sidebar { display: none; }
-      #hero { padding: 60px 0 0; }
+      .order-img-first { order: -1; }
     }
     @media (max-width: 767px) {
-      section { padding: 64px 0; }
-      .hero-float { display: none !important; }
+      #hero { padding: 50px 0 40px; }
+      section { padding: 56px 0; }
+      .pricing-card.featured { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════ NAVBAR ══════════ -->
+<!-- ══════════════════════════════════
+     NAVBAR
+══════════════════════════════════ -->
 <nav id="navbar" class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#">white<span>pace</span></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-      <i class="bi bi-list" style="font-size:1.4rem;color:var(--dark)"></i>
+    <!-- Brand -->
+    <a class="navbar-brand-logo d-flex align-items-center gap-2" href="#">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect width="22" height="22" rx="5" fill="#4f8ef7"/>
+        <path d="M6 11l4 4 6-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      whitepace
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navContent">
-      <ul class="navbar-nav mx-auto gap-1">
+
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav nav-menu mx-auto gap-1">
         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-        <li class="nav-item"><a class="nav-link" href="#howitworks">How it works</a></li>
-        <li class="nav-item"><a class="nav-link" href="#integrations">Integrations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
         <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
       </ul>
       <div class="d-flex gap-2 align-items-center mt-3 mt-lg-0">
-        <a href="#" class="nav-link px-3" style="font-size:.88rem;font-weight:700;color:var(--dark)">Log in</a>
-        <a href="#" class="btn-try nav-link">Try Whitepace free</a>
+        <a href="#" class="btn-nav-login">Log in</a>
+        <a href="#" class="btn-nav-try">Try Whitepace free</a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- ══════════ HERO ══════════ -->
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
 <section id="hero">
   <div class="container">
     <div class="row align-items-center g-5">
-      <!-- Left copy -->
+
+      <!-- Left: copy -->
       <div class="col-lg-5">
-        <div class="hero-eyebrow">
-          <i class="bi bi-stars"></i> New — AI-Powered Workspace
-        </div>
-        <h1 class="hero-title">
-          Project Management<br>Made <span class="accent">Simple</span> &amp; Powerful
-        </h1>
+        <h1 class="hero-title">Get More Done with<br>whitepace</h1>
         <p class="hero-subtitle">
-          Whitepace helps your team plan, organize, and manage work efficiently — so you can focus on what truly matters and hit every deadline with confidence.
+          Project management software that enables your teams to collaborate, plan, analyze and manage everyday tasks.
         </p>
-        <div class="d-flex flex-wrap gap-3 align-items-center">
-          <a href="#" class="btn-hero-primary">
-            Get Started Free <i class="bi bi-arrow-right"></i>
-          </a>
-          <a href="#" class="btn-hero-secondary">
-            <span class="play-icon"><i class="bi bi-play-fill"></i></span>
-            Watch Demo
-          </a>
-        </div>
-        <div class="d-flex gap-4 mt-4 pt-2">
-          <div style="font-size:.8rem;color:#9CA3AF;font-weight:500">
-            <i class="bi bi-check-circle-fill text-purple me-1"></i> No credit card required
-          </div>
-          <div style="font-size:.8rem;color:#9CA3AF;font-weight:500">
-            <i class="bi bi-check-circle-fill text-purple me-1"></i> Free 14-day trial
-          </div>
-        </div>
+        <a href="#" class="btn-hero">
+          Try Whitepace free &nbsp;<i class="bi bi-arrow-right"></i>
+        </a>
       </div>
 
-      <!-- Right mockup -->
+      <!-- Right: dashboard mockup -->
       <div class="col-lg-7">
-        <div class="hero-mockup-wrap position-relative">
-          <!-- Float card 1 -->
-          <div class="hero-float fl1 d-none d-lg-block">
-            <div style="font-size:.72rem;color:#9CA3AF;font-weight:600;margin-bottom:6px">Team Progress</div>
-            <div style="font-size:1.5rem;font-weight:800;color:var(--dark)">87%</div>
-            <div style="height:6px;background:#EEF2FF;border-radius:3px;margin-top:6px">
-              <div style="width:87%;height:100%;background:var(--purple);border-radius:3px"></div>
+        <div class="hero-mockup p-3 p-md-4" style="min-height:280px;">
+          <div class="mockup-inner">
+            <!-- Topbar simulation -->
+            <div class="d-flex gap-2 mb-3 align-items-center">
+              <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:#febc2e"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div>
+              <div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.1);margin-left:8px"></div>
             </div>
-          </div>
-
-          <div class="hero-dashboard">
-            <!-- Browser topbar -->
-            <div class="dashboard-topbar">
-              <div class="db-dot" style="background:#FF5F57"></div>
-              <div class="db-dot" style="background:#FEBC2E"></div>
-              <div class="db-dot" style="background:#28C840"></div>
-              <div style="flex:1;margin-left:16px">
-                <div style="background:rgba(255,255,255,.1);border-radius:4px;height:22px;width:240px;display:flex;align-items:center;padding:0 10px">
-                  <span style="font-size:.7rem;color:rgba(255,255,255,.5)">app.whitepace.io/dashboard</span>
-                </div>
-              </div>
+            <!-- Row of blocks simulating project cards -->
+            <div class="row g-2 mb-2">
+              <div class="col-4"><div style="height:54px;background:rgba(255,255,255,.12);border-radius:6px;padding:8px;">
+                <div style="height:6px;background:rgba(255,255,255,.3);border-radius:3px;margin-bottom:6px;width:70%"></div>
+                <div style="height:5px;background:rgba(255,255,255,.15);border-radius:3px;width:50%"></div>
+              </div></div>
+              <div class="col-4"><div style="height:54px;background:rgba(79,142,247,.35);border-radius:6px;padding:8px;">
+                <div style="height:6px;background:rgba(255,255,255,.5);border-radius:3px;margin-bottom:6px;width:60%"></div>
+                <div style="height:5px;background:rgba(255,255,255,.25);border-radius:3px;width:80%"></div>
+              </div></div>
+              <div class="col-4"><div style="height:54px;background:rgba(255,255,255,.08);border-radius:6px;padding:8px;">
+                <div style="height:6px;background:rgba(255,255,255,.2);border-radius:3px;margin-bottom:6px;width:55%"></div>
+                <div style="height:5px;background:rgba(255,255,255,.1);border-radius:3px;width:40%"></div>
+              </div></div>
             </div>
-
-            <!-- Dashboard inner -->
-            <div class="dashboard-body d-flex">
-              <!-- Sidebar -->
-              <div class="dash-sidebar d-none d-lg-block">
-                <div style="color:#fff;font-size:.8rem;font-weight:800;margin-bottom:20px;letter-spacing:-.3px">Whitepace</div>
-                <div class="dash-nav-item active"><i class="bi bi-grid-1x2-fill"></i> Dashboard</div>
-                <div class="dash-nav-item"><i class="bi bi-kanban-fill"></i> Board</div>
-                <div class="dash-nav-item"><i class="bi bi-calendar3"></i> Calendar</div>
-                <div class="dash-nav-item"><i class="bi bi-chat-dots-fill"></i> Messages</div>
-                <div class="dash-nav-item"><i class="bi bi-people-fill"></i> Team</div>
-                <div class="dash-nav-item"><i class="bi bi-graph-up"></i> Reports</div>
-                <div class="dash-nav-item mt-4"><i class="bi bi-gear"></i> Settings</div>
-              </div>
-
-              <!-- Main content -->
-              <div class="dash-content flex-fill">
-                <div style="font-size:.82rem;font-weight:800;color:var(--dark);margin-bottom:16px">Overview</div>
-
-                <!-- Stat cards -->
-                <div class="row g-2 mb-3">
-                  <div class="col-4">
-                    <div class="dash-stat-card">
-                      <div class="dash-stat-num">24</div>
-                      <div class="dash-stat-label">Total Projects</div>
-                      <div style="font-size:.65rem;color:var(--green);font-weight:700;margin-top:4px">↑ 12%</div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="dash-stat-card">
-                      <div class="dash-stat-num">142</div>
-                      <div class="dash-stat-label">Active Tasks</div>
-                      <div style="font-size:.65rem;color:var(--green);font-weight:700;margin-top:4px">↑ 8%</div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="dash-stat-card">
-                      <div class="dash-stat-num">8</div>
-                      <div class="dash-stat-label">Team Members</div>
-                      <div style="font-size:.65rem;color:#9CA3AF;font-weight:700;margin-top:4px">— same</div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Task list -->
-                <div style="font-size:.72rem;font-weight:700;color:#9CA3AF;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px">Recent Tasks</div>
-                <div class="dash-task-row">
-                  <div class="task-check done"><i class="bi bi-check"></i></div>
-                  <span>Design new landing page</span>
-                  <span class="task-badge badge-green">Done</span>
-                </div>
-                <div class="dash-task-row">
-                  <div class="task-check"></div>
-                  <span>Integrate payment gateway</span>
-                  <span class="task-badge badge-purple">In Progress</span>
-                </div>
-                <div class="dash-task-row">
-                  <div class="task-check"></div>
-                  <span>Write API documentation</span>
-                  <span class="task-badge badge-orange">Pending</span>
-                </div>
-                <div class="dash-task-row">
-                  <div class="task-check done"><i class="bi bi-check"></i></div>
-                  <span>User testing round #2</span>
-                  <span class="task-badge badge-green">Done</span>
-                </div>
-              </div>
+            <!-- List rows -->
+            <div class="mbar-row mb-2 d-flex gap-2 align-items-center">
+              <div style="width:12px;height:12px;border-radius:50%;background:rgba(79,142,247,.6);flex-shrink:0"></div>
+              <div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.12)"></div>
+              <div style="width:40px;height:6px;border-radius:3px;background:rgba(255,255,255,.2)"></div>
             </div>
-          </div>
-
-          <!-- Float card 2 -->
-          <div class="hero-float fl2 d-none d-lg-block">
-            <div style="font-size:.7rem;color:#9CA3AF;font-weight:600;margin-bottom:6px">Tasks Completed</div>
-            <div style="font-size:1.4rem;font-weight:800;color:var(--dark)">1,284 <span style="font-size:.75rem;color:var(--green);font-weight:700">↑ 24%</span></div>
-            <div style="font-size:.7rem;color:#9CA3AF;margin-top:2px">this month</div>
+            <div class="mbar-row mb-2 d-flex gap-2 align-items-center">
+              <div style="width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,.5);flex-shrink:0"></div>
+              <div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.1)"></div>
+              <div style="width:60px;height:6px;border-radius:3px;background:rgba(255,255,255,.15)"></div>
+            </div>
+            <div class="mbar-row d-flex gap-2 align-items-center">
+              <div style="width:12px;height:12px;border-radius:50%;background:rgba(249,115,22,.5);flex-shrink:0"></div>
+              <div style="flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.08)"></div>
+              <div style="width:50px;height:6px;border-radius:3px;background:rgba(255,255,255,.12)"></div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ══════════ BRAND LOGOS ══════════ -->
-<section id="brands" style="padding:0">
-  <div class="container">
-    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 gap-md-5 py-4" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:60px">
-      <span class="brand-logo"><i class="bi bi-slack" style="color:#E01E5A"></i> Slack</span>
-      <span class="brand-logo"><i class="bi bi-google" style="color:#4285F4"></i> Google</span>
-      <span class="brand-logo"><i class="bi bi-microsoft" style="color:#737373"></i> Microsoft</span>
-      <span class="brand-logo" style="font-style:italic">notion</span>
-      <span class="brand-logo"><i class="bi bi-github"></i> GitHub</span>
-      <span class="brand-logo"><i class="bi bi-dropbox" style="color:#0061FF"></i> Dropbox</span>
-    </div>
-  </div>
-</section>
 
-<!-- ══════════ FEATURES ══════════ -->
-<section id="features">
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6 text-center">
-        <div class="section-eyebrow">Features</div>
-        <h2 class="section-title">Everything Your Team Needs<br>to Stay on Track</h2>
-        <p class="section-sub mx-auto">Whitepace comes with all the tools you need to collaborate, plan, and deliver projects faster than ever before.</p>
-      </div>
-    </div>
-    <div class="row g-4">
-      <!-- Feature 1 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-kanban-fill"></i></div>
-          <h5>Visual Boards</h5>
-          <p>Drag-and-drop Kanban boards give your team a clear view of what's in progress, what's done, and what's next — all at a glance.</p>
-        </div>
-      </div>
-      <!-- Feature 2 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-calendar3-event-fill"></i></div>
-          <h5>Timeline & Gantt</h5>
-          <p>Plan project timelines visually and track dependencies so every deadline is met and every milestone is celebrated on time.</p>
-        </div>
-      </div>
-      <!-- Feature 3 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-chat-square-dots-fill"></i></div>
-          <h5>Real-time Collaboration</h5>
-          <p>Chat, comment, and collaborate on tasks in real-time. Keep all discussions in context so nothing falls through the cracks.</p>
-        </div>
-      </div>
-      <!-- Feature 4 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-bar-chart-fill"></i></div>
-          <h5>Advanced Reporting</h5>
-          <p>Get deep insights into team performance, project velocity, and workload distribution with beautiful, exportable reports.</p>
-        </div>
-      </div>
-      <!-- Feature 5 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-shield-lock-fill"></i></div>
-          <h5>Enterprise Security</h5>
-          <p>SOC2-compliant with SSO, 2FA, role-based permissions, and full audit logs. Your data is safe and always in your control.</p>
-        </div>
-      </div>
-      <!-- Feature 6 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card">
-          <div class="feature-icon-wrap"><i class="bi bi-puzzle-fill"></i></div>
-          <h5>100+ Integrations</h5>
-          <p>Connect with the tools your team already uses — Slack, GitHub, Google Drive, Zoom, Figma and many more — in seconds.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ HOW IT WORKS ══════════ -->
-<section id="howitworks">
+<!-- ══════════════════════════════════
+     PROJECT MANAGEMENT
+══════════════════════════════════ -->
+<section id="project-mgmt">
   <div class="container">
     <div class="row align-items-center g-5">
 
-      <!-- App mockup (left) -->
-      <div class="col-lg-6 order-lg-1 order-2">
-        <div class="app-mockup">
-          <div class="mockup-header">
-            <div class="m-dot" style="background:#FF5F57"></div>
-            <div class="m-dot" style="background:#FEBC2E"></div>
-            <div class="m-dot" style="background:#28C840"></div>
-            <span style="color:rgba(255,255,255,.5);font-size:.72rem;margin-left:12px">Project Board · Design Sprint</span>
-          </div>
-          <div class="mockup-body">
-            <div class="row g-2">
-              <!-- To Do -->
-              <div class="col-4">
-                <div class="kanban-col">
-                  <div class="kanban-col-title">📋 To Do</div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(255,209,102,.15);color:#FBBF24">Design</div><br>
-                    User research interviews
-                    <div class="progress-mini"><div class="progress-mini-fill" style="width:30%;background:#FBBF24"></div></div>
-                  </div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(99,102,241,.15);color:#818CF8">Dev</div><br>
-                    API rate limiting
-                  </div>
-                </div>
-              </div>
-              <!-- In Progress -->
-              <div class="col-4">
-                <div class="kanban-col">
-                  <div class="kanban-col-title">🔄 In Progress</div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(99,102,241,.15);color:#818CF8">Design</div><br>
-                    Landing page redesign
-                    <div class="progress-mini"><div class="progress-mini-fill" style="width:70%;background:#818CF8"></div></div>
-                  </div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(34,197,94,.15);color:#4ADE80">QA</div><br>
-                    Mobile responsiveness
-                  </div>
-                </div>
-              </div>
-              <!-- Done -->
-              <div class="col-4">
-                <div class="kanban-col">
-                  <div class="kanban-col-title">✅ Done</div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(34,197,94,.15);color:#4ADE80">Done</div><br>
-                    Brand guidelines doc
-                    <div class="progress-mini"><div class="progress-mini-fill" style="width:100%;background:#4ADE80"></div></div>
-                  </div>
-                  <div class="kanban-card">
-                    <div class="kanban-tag" style="background:rgba(34,197,94,.15);color:#4ADE80">Done</div><br>
-                    Onboarding flow
-                  </div>
-                </div>
-              </div>
+      <!-- Left: text -->
+      <div class="col-lg-5">
+        <h2 class="section-title">Project<br>Management</h2>
+        <p class="section-sub">
+          Images, videos, PDFs and audio files are supported. Create math expressions and diagrams directly from the app. Take photos with the mobile app and save them to a note.
+        </p>
+        <a href="#" class="btn-section">Get Started <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Right: image placeholder -->
+      <div class="col-lg-7">
+        <div class="img-placeholder" style="min-height:280px;">
+          <!-- App screenshot simulation -->
+          <div style="width:90%;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.08);padding:18px;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div>
             </div>
+            <div style="height:8px;background:#e5e7eb;border-radius:4px;width:50%;margin-bottom:10px"></div>
+            <div class="row g-2">
+              <div class="col-6"><div style="height:40px;background:#dbeafe;border-radius:6px"></div></div>
+              <div class="col-6"><div style="height:40px;background:#ede9fe;border-radius:6px"></div></div>
+            </div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-top:12px;width:80%"></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-top:8px;width:60%"></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-top:8px;width:70%"></div>
           </div>
         </div>
       </div>
 
-      <!-- Steps (right) -->
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="section-eyebrow">How It Works</div>
-        <h2 class="section-title">Get Your Team<br>Up &amp; Running Fast</h2>
-        <p class="section-sub mb-5">No steep learning curve. Start collaborating in minutes — not weeks.</p>
-
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-text">
-            <h6>Create Your Workspace</h6>
-            <p>Sign up and set up your workspace in seconds. Invite your team with one click and hit the ground running without any complex setup.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-text">
-            <h6>Add Projects &amp; Tasks</h6>
-            <p>Break work down into projects and tasks. Assign owners, set due dates, add priorities and attach files — all in one place.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-text">
-            <h6>Track &amp; Deliver</h6>
-            <p>Use boards, timelines, and reports to stay on top of progress. Get notified when things need your attention and celebrate wins together.</p>
-          </div>
-        </div>
-        <a href="#" class="btn-hero-primary d-inline-flex mt-2">Start for Free <i class="bi bi-arrow-right"></i></a>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ INTEGRATIONS ══════════ -->
-<section id="integrations">
+
+<!-- ══════════════════════════════════
+     WORK TOGETHER
+══════════════════════════════════ -->
+<section id="work-together">
   <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6 text-center">
-        <div class="section-eyebrow">Integrations</div>
-        <h2 class="section-title">Connect the Tools<br>You Already Love</h2>
-        <p class="section-sub mx-auto">Whitepace integrates with your favourite apps so your workflow is seamless from day one.</p>
+    <div class="row align-items-center g-5">
+
+      <!-- Left: interactive dots diagram -->
+      <div class="col-lg-6">
+        <div class="dots-wrap" style="min-height:240px;">
+          <svg class="dots-svg" viewBox="0 0 360 240" style="position:absolute;inset:0">
+            <!-- connector lines -->
+            <line x1="180" y1="120" x2="90"  y2="60"  stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="270" y2="70"  stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="60"  y2="140" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="300" y2="150" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="130" y2="190" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="230" y2="195" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 4"/>
+          </svg>
+
+          <!-- Center hub -->
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+                      width:52px;height:52px;border-radius:50%;background:#2563eb;
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 4px 18px rgba(37,99,235,.4);z-index:3">
+            <i class="bi bi-grid-1x2-fill text-white" style="font-size:1.1rem"></i>
+          </div>
+
+          <!-- Satellite nodes -->
+          <!-- Yellow top-left -->
+          <div style="position:absolute;left:22%;top:18%;width:38px;height:38px;border-radius:50%;
+                      background:#fbbf24;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(251,191,36,.4)">
+            <i class="bi bi-star-fill text-white" style="font-size:.85rem"></i>
+          </div>
+          <!-- Green top-right -->
+          <div style="position:absolute;left:72%;top:22%;width:38px;height:38px;border-radius:50%;
+                      background:#22c55e;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(34,197,94,.4)">
+            <i class="bi bi-check-lg text-white" style="font-size:.85rem"></i>
+          </div>
+          <!-- Red left -->
+          <div style="position:absolute;left:10%;top:52%;width:38px;height:38px;border-radius:50%;
+                      background:#ef4444;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(239,68,68,.4)">
+            <i class="bi bi-bell-fill text-white" style="font-size:.8rem"></i>
+          </div>
+          <!-- Blue right -->
+          <div style="position:absolute;left:79%;top:55%;width:38px;height:38px;border-radius:50%;
+                      background:#3b82f6;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(59,130,246,.4)">
+            <i class="bi bi-people-fill text-white" style="font-size:.82rem"></i>
+          </div>
+          <!-- Orange bottom-left -->
+          <div style="position:absolute;left:30%;top:76%;width:38px;height:38px;border-radius:50%;
+                      background:#f97316;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(249,115,22,.4)">
+            <i class="bi bi-lightning-fill text-white" style="font-size:.8rem"></i>
+          </div>
+          <!-- Teal bottom-right -->
+          <div style="position:absolute;left:60%;top:77%;width:38px;height:38px;border-radius:50%;
+                      background:#14b8a6;display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 3px 10px rgba(20,184,166,.4)">
+            <i class="bi bi-chat-fill text-white" style="font-size:.8rem"></i>
+          </div>
+          <!-- small X icon (crosshair) mid-left -->
+          <div style="position:absolute;left:38%;top:45%;font-size:1.1rem;color:#9ca3af">✕</div>
+        </div>
       </div>
-    </div>
-    <div class="integration-grid">
-      <div class="integration-card">
-        <div class="int-icon" style="background:#ECF5FF"><span style="font-size:1.8rem">💬</span></div>
-        <h6>Slack</h6>
-        <p>Get task updates directly in your Slack channels</p>
+
+      <!-- Right: text -->
+      <div class="col-lg-6">
+        <h2 class="section-title">Work together</h2>
+        <p class="section-sub">
+          With Whitepace, share your perfect workspace with your teammates and build your best work together. Plans start from $8/month. Take a look at our plans.
+        </p>
+        <a href="#" class="btn-section">Try it free <i class="bi bi-arrow-right"></i></a>
       </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#F0FFF4"><span style="font-size:1.8rem">🔗</span></div>
-        <h6>GitHub</h6>
-        <p>Link commits and PRs directly to your tasks</p>
-      </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#FEF9EC"><span style="font-size:1.8rem">📁</span></div>
-        <h6>Google Drive</h6>
-        <p>Attach files from Drive to any task instantly</p>
-      </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#FFF0F0"><span style="font-size:1.8rem">📹</span></div>
-        <h6>Zoom</h6>
-        <p>Start meetings right from a task or project</p>
-      </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#EEF2FF"><span style="font-size:1.8rem">🎨</span></div>
-        <h6>Figma</h6>
-        <p>Preview Figma files inline without leaving Whitepace</p>
-      </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#F5F0FF"><span style="font-size:1.8rem">🗂️</span></div>
-        <h6>Notion</h6>
-        <p>Sync notes and docs between your tools automatically</p>
-      </div>
-      <div class="integration-card">
-        <div class="int-icon" style="background:#F0FFF4"><span style="font-size:1.8rem">📊</span></div>
-        <h6>Zapier</h6>
-        <p>Automate repetitive workflows across 5,000+ apps</p>
-      </div>
-      <div class="integration-card" style="border-style:dashed;background:transparent">
-        <div class="int-icon" style="background:var(--purple-bg)"><i class="bi bi-plus-lg text-purple" style="font-size:1.5rem"></i></div>
-        <h6>More Apps</h6>
-        <p>100+ integrations available and growing every week</p>
-      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ══════════ PRICING ══════════ -->
+
+<!-- ══════════════════════════════════
+     USE AS EXTENSION — dark navy
+══════════════════════════════════ -->
+<section id="use-extension">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Left: text -->
+      <div class="col-lg-6">
+        <h2 class="ext-title">
+          Use as <span class="underline-link">Extension</span>
+        </h2>
+        <p class="ext-sub">
+          With Whitepace, share your perfect workspace with your teammates and build your best work together. Plans start from $8/month. Take a look at our plans.
+        </p>
+        <a href="#" class="btn-hero">Learn more <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Right: placeholder -->
+      <div class="col-lg-6">
+        <div class="img-placeholder-dark" style="min-height:240px;border:1px solid rgba(255,255,255,.08);">
+          <div style="text-align:center;color:rgba(255,255,255,.3);font-size:.8rem">
+            <i class="bi bi-browser-chrome" style="font-size:3rem;display:block;margin-bottom:8px;color:rgba(79,142,247,.5)"></i>
+            Browser Extension Preview
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     CUSTOMISE IT TO YOUR NEEDS
+══════════════════════════════════ -->
+<section id="customise">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Left: image placeholder -->
+      <div class="col-lg-6">
+        <div class="img-placeholder" style="min-height:260px;">
+          <div style="width:88%;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.07);padding:18px;">
+            <div style="height:8px;background:#dbeafe;border-radius:4px;width:55%;margin-bottom:12px"></div>
+            <div class="d-flex gap-2 mb-2">
+              <div style="height:28px;width:70px;background:#ede9fe;border-radius:5px"></div>
+              <div style="height:28px;width:70px;background:#dbeafe;border-radius:5px"></div>
+              <div style="height:28px;width:70px;background:#dcfce7;border-radius:5px"></div>
+            </div>
+            <div style="height:5px;background:#e5e7eb;border-radius:3px;width:90%;margin-bottom:7px"></div>
+            <div style="height:5px;background:#e5e7eb;border-radius:3px;width:75%;margin-bottom:7px"></div>
+            <div style="height:5px;background:#e5e7eb;border-radius:3px;width:60%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: text -->
+      <div class="col-lg-6">
+        <h2 class="section-title">Customise it to<br>your needs</h2>
+        <p class="section-sub">
+          Customise Whitepace to your specific needs. Tailor your workspace to suit your workflow and preferences, ensuring an effective working experience.
+        </p>
+        <a href="#" class="btn-section">Get it now <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     PRICING
+══════════════════════════════════ -->
 <section id="pricing">
   <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6 text-center">
-        <div class="section-eyebrow">Pricing</div>
-        <h2 class="section-title">Simple Pricing,<br>No Hidden Fees</h2>
-        <p class="section-sub mx-auto">Start free. Scale when you're ready. Cancel anytime with no questions asked.</p>
-        <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
-          <div class="pricing-toggle">
-            <button class="active" id="monthlyBtn" onclick="togglePricing('monthly')">Monthly</button>
-            <button id="yearlyBtn" onclick="togglePricing('yearly')">
-              Yearly <span class="pricing-badge">Save 20%</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row g-4 justify-content-center">
-      <!-- Free -->
-      <div class="col-md-6 col-lg-4">
-        <div class="pricing-card">
-          <div class="plan-name">Free</div>
-          <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="0" data-yearly="0">0</span></div>
-          <div class="plan-period">per user / month, billed monthly</div>
-          <div class="plan-desc">Perfect for individuals and small teams just getting started with project management.</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Up to 5 users</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> 3 active projects</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Basic Kanban boards</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> 1GB file storage</div>
-          <div class="plan-feature" style="opacity:.4"><div class="chk"><i class="bi bi-x"></i></div> Advanced reporting</div>
-          <div class="plan-feature" style="opacity:.4"><div class="chk"><i class="bi bi-x"></i></div> Priority support</div>
-          <a href="#" class="btn-plan btn-plan-outline">Get started free</a>
-        </div>
-      </div>
 
-      <!-- Pro (Popular) -->
-      <div class="col-md-6 col-lg-4">
-        <div class="pricing-card popular">
-          <div class="popular-label">MOST POPULAR</div>
-          <div class="plan-name">Pro</div>
-          <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="12" data-yearly="10">12</span></div>
-          <div class="plan-period">per user / month, billed monthly</div>
-          <div class="plan-desc">For growing teams who need more power, more storage, and deeper collaboration tools.</div>
-          <div class="plan-feature"><div class="chk green"><i class="bi bi-check"></i></div> Unlimited users</div>
-          <div class="plan-feature"><div class="chk green"><i class="bi bi-check"></i></div> Unlimited projects</div>
-          <div class="plan-feature"><div class="chk green"><i class="bi bi-check"></i></div> Timeline &amp; Gantt view</div>
-          <div class="plan-feature"><div class="chk green"><i class="bi bi-check"></i></div> 50GB file storage</div>
-          <div class="plan-feature"><div class="chk green"><i class="bi bi-check"></i></div> Advanced reporting</div>
-          <div class="plan-feature" style="opacity:.4"><div class="chk"><i class="bi bi-x"></i></div> Custom branding</div>
-          <a href="#" class="btn-plan btn-plan-filled">Start 14-day free trial</a>
-        </div>
-      </div>
-
-      <!-- Business -->
-      <div class="col-md-6 col-lg-4">
-        <div class="pricing-card">
-          <div class="plan-name">Business</div>
-          <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="24" data-yearly="19">24</span></div>
-          <div class="plan-period">per user / month, billed monthly</div>
-          <div class="plan-desc">For organizations that need enterprise-grade security, compliance, and dedicated support.</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Everything in Pro</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Unlimited storage</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Custom branding</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> SSO &amp; advanced permissions</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> Dedicated account manager</div>
-          <div class="plan-feature"><div class="chk"><i class="bi bi-check"></i></div> SLA &amp; audit logs</div>
-          <a href="#" class="btn-plan btn-plan-outline">Contact sales</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- FAQ note -->
-    <p class="text-center mt-5" style="font-size:.88rem;color:#9CA3AF">
-      All plans include a 14-day free trial. No credit card required. &nbsp;
-      <a href="#" style="color:var(--purple);font-weight:700;text-decoration:none">View full comparison →</a>
+    <h2 class="pricing-center-title">Choose Your Plan</h2>
+    <p class="pricing-center-sub">
+      Whether you want to get organised, keep your personal life on track, or boost workplace productivity, Whitepace has the right plan for you.
     </p>
+
+    <div class="row g-4 justify-content-center align-items-stretch">
+
+      <!-- Free -->
+      <div class="col-md-4">
+        <div class="pricing-card">
+          <div class="plan-label">Free</div>
+          <div class="plan-price">$0</div>
+          <div class="plan-period">Free forever</div>
+          <hr class="plan-divider"/>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> 5 active projects</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> 2 GB storage</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> 50 integration</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Basic analytics</div>
+          <div class="plan-feature muted"><i class="bi bi-x-circle-fill"></i> Priority support</div>
+          <div class="plan-feature muted"><i class="bi bi-x-circle-fill"></i> Custom branding</div>
+          <div class="plan-feature muted"><i class="bi bi-x-circle-fill"></i> Advanced reporting</div>
+          <a href="#" class="btn-plan btn-plan-outline">Get Started</a>
+        </div>
+      </div>
+
+      <!-- Personal (Featured) -->
+      <div class="col-md-4">
+        <div class="pricing-card featured">
+          <div class="plan-label">Personal</div>
+          <div class="plan-price"><sup>$</sup>11.99</div>
+          <div class="plan-period">Per month</div>
+          <hr class="plan-divider"/>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Unlimited projects</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> 10 GB storage</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> 100 integration</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Advanced analytics</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Priority support</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Custom branding</div>
+          <div class="plan-feature muted" style="opacity:.35"><i class="bi bi-x-circle-fill"></i> Advanced reporting</div>
+          <a href="#" class="btn-plan btn-plan-filled">Get Started</a>
+        </div>
+      </div>
+
+      <!-- Organisation -->
+      <div class="col-md-4">
+        <div class="pricing-card">
+          <div class="plan-label">Organisation</div>
+          <div class="plan-price"><sup>$</sup>49.99</div>
+          <div class="plan-period">Per month</div>
+          <hr class="plan-divider"/>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Unlimited projects</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Unlimited storage</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Unlimited integration</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Advanced analytics</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Priority support</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Custom branding</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill"></i> Advanced reporting</div>
+          <a href="#" class="btn-plan btn-plan-outline">Get Started</a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- ══════════ TESTIMONIALS ══════════ -->
+
+<!-- ══════════════════════════════════
+     YOUR WORK, EVERYWHERE YOU ARE
+══════════════════════════════════ -->
+<section id="your-work">
+  <!-- rings decoration -->
+  <div class="rings-wrap">
+    <div class="ring" style="width:300px;height:300px;"></div>
+    <div class="ring" style="width:500px;height:500px;"></div>
+    <div class="ring" style="width:700px;height:700px;"></div>
+    <div class="ring" style="width:900px;height:900px;"></div>
+  </div>
+
+  <div class="container" style="position:relative;z-index:2">
+    <h2 class="your-work-title">
+      Your work, everywhere <span class="underline-wht">you are</span>
+    </h2>
+    <p class="your-work-sub">
+      Access your notes, tasks, and projects from any device. Keep your team aligned whether they're in the office, at home, or on the go with real-time syncing across all platforms.
+    </p>
+    <a href="#" class="btn-hero d-inline-flex">Get Started <i class="bi bi-arrow-right"></i></a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     100% YOUR DATA
+══════════════════════════════════ -->
+<section id="your-data">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Left: text -->
+      <div class="col-lg-6">
+        <h2 class="section-title">100% your data</h2>
+        <p class="section-sub">
+          All your data is encrypted end-to-end. We never sell or share your personal information. You have full control — export, delete, or transfer your data at any time with one click.
+        </p>
+        <a href="#" class="btn-section">Learn more <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Right: data visual -->
+      <div class="col-lg-6">
+        <div class="data-visual">
+          <!-- SVG illustration of data nodes / shield concept -->
+          <svg viewBox="0 0 380 260" width="100%" style="max-width:380px">
+            <!-- background circle -->
+            <circle cx="190" cy="130" r="110" fill="none" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="6 4"/>
+            <circle cx="190" cy="130" r="75"  fill="none" stroke="#dbeafe" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <!-- connector lines -->
+            <line x1="190" y1="130" x2="90"  y2="55"  stroke="#bfdbfe" stroke-width="1.5"/>
+            <line x1="190" y1="130" x2="290" y2="55"  stroke="#bfdbfe" stroke-width="1.5"/>
+            <line x1="190" y1="130" x2="60"  y2="175" stroke="#bfdbfe" stroke-width="1.5"/>
+            <line x1="190" y1="130" x2="320" y2="175" stroke="#bfdbfe" stroke-width="1.5"/>
+            <line x1="190" y1="130" x2="190" y2="240" stroke="#bfdbfe" stroke-width="1.5"/>
+            <!-- center node -->
+            <circle cx="190" cy="130" r="30" fill="#2563eb" opacity=".9"/>
+            <text x="190" y="136" text-anchor="middle" fill="white" font-size="16">🔒</text>
+            <!-- satellite nodes -->
+            <circle cx="90"  cy="55"  r="22" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="90"  y="61"  text-anchor="middle" font-size="13">📁</text>
+            <circle cx="290" cy="55"  r="22" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="290" y="61"  text-anchor="middle" font-size="13">☁️</text>
+            <circle cx="60"  cy="175" r="22" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="60"  y="181" text-anchor="middle" font-size="13">🛡️</text>
+            <circle cx="320" cy="175" r="22" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="320" y="181" text-anchor="middle" font-size="13">🔑</text>
+            <circle cx="190" cy="240" r="22" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="190" y="246" text-anchor="middle" font-size="13">📱</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     OUR SPONSORS
+══════════════════════════════════ -->
+<section id="sponsors">
+  <div class="container">
+    <h3 class="sponsors-title">Our sponsors</h3>
+    <div class="row justify-content-center align-items-center g-4">
+      <div class="col-6 col-sm-3">
+        <div class="sponsor-item">
+          <svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 2C6.03 2 2 6.03 2 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16.2c-3.97 0-7.2-3.23-7.2-7.2S7.03 3.8 11 3.8s7.2 3.23 7.2 7.2-3.23 7.2-7.2 7.2z" fill="#555"/></svg>
+          Apple
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="sponsor-item">
+          <svg width="22" height="18" viewBox="0 0 22 18"><rect x="0" y="0" width="10" height="8" fill="#f25022"/><rect x="12" y="0" width="10" height="8" fill="#7fba00"/><rect x="0" y="10" width="10" height="8" fill="#00a4ef"/><rect x="12" y="10" width="10" height="8" fill="#ffb900"/></svg>
+          Microsoft
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="sponsor-item">
+          <!-- Slack colored hash -->
+          <svg width="22" height="22" viewBox="0 0 22 22">
+            <path d="M8.5 2a2 2 0 1 0 0 4H10V2H8.5z" fill="#E01E5A"/>
+            <path d="M12 2v4h1.5a2 2 0 0 0 0-4H12z" fill="#36C5F0"/>
+            <path d="M2 13.5a2 2 0 0 0 4 0V12H2v1.5z" fill="#2EB67D"/>
+            <path d="M2 8.5A2 2 0 0 0 6 8.5V7H2v1.5z" fill="#ECB22E"/>
+            <path d="M18 8.5a2 2 0 1 0-4 0V10h4V8.5z" fill="#E01E5A"/>
+            <path d="M20 13.5a2 2 0 0 0-2-2h-1.5v4H18a2 2 0 0 0 2-2z" fill="#36C5F0"/>
+            <path d="M8.5 16H10v4H8.5a2 2 0 0 1 0-4z" fill="#2EB67D"/>
+            <path d="M12 16h1.5a2 2 0 0 1 0 4H12v-4z" fill="#ECB22E"/>
+          </svg>
+          slack
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="sponsor-item">
+          <!-- Google G -->
+          <svg width="22" height="22" viewBox="0 0 22 22">
+            <path d="M11 9.5v3h5.2a4.5 4.5 0 0 1-1.9 2.9l3 2.3c1.8-1.6 2.8-4 2.8-6.8 0-.7-.1-1.3-.2-1.9H11v.5z" fill="#4285F4"/>
+            <path d="M5.1 13.1l-.7.5-2.4 1.9C3.6 17.8 7.1 20 11 20c2.7 0 4.9-.9 6.5-2.3l-3-2.3c-.8.6-1.9.9-3.5.9-2.7 0-4.9-1.8-5.7-4.2H5z" fill="#34A853"/>
+            <path d="M2 9.2C1.4 10.3 1 11.6 1 13s.4 2.7 1 3.8l3.1-2.4c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9L2 9.2z" fill="#FBBC05"/>
+            <path d="M11 4.5c1.5 0 2.8.5 3.8 1.4L18 2.8C16.4 1.3 14 .5 11 .5 7.1.5 3.6 2.7 2 5.9l3.1 2.4C5.9 6.4 8.2 4.5 11 4.5z" fill="#EA4335"/>
+          </svg>
+          Google
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     WORK WITH FAVOURITE APPS
+══════════════════════════════════ -->
+<section id="fav-apps">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Left: orbit diagram -->
+      <div class="col-lg-5">
+        <div class="orbit-wrap">
+          <!-- Outer ring -->
+          <div class="orbit-ring" style="width:260px;height:260px;"></div>
+          <!-- Inner ring -->
+          <div class="orbit-ring" style="width:180px;height:180px;"></div>
+
+          <!-- Center -->
+          <div class="orbit-center">
+            <svg width="24" height="24" viewBox="0 0 22 22"><rect width="22" height="22" rx="5" fill="rgba(255,255,255,.2)"/><path d="M6 11l4 4 6-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- Orbit nodes (positioned around the circle) -->
+          <!-- Top -->
+          <div class="orbit-node" style="left:calc(50% - 21px);top:2px;">
+            <span style="font-size:1.1rem">📧</span>
+          </div>
+          <!-- Top-right -->
+          <div class="orbit-node" style="left:calc(50% + 88px);top:calc(50% - 88px);">
+            <span style="font-size:1.1rem">📁</span>
+          </div>
+          <!-- Right -->
+          <div class="orbit-node" style="right:2px;top:calc(50% - 21px);">
+            <span style="font-size:1.1rem">💬</span>
+          </div>
+          <!-- Bottom-right -->
+          <div class="orbit-node" style="left:calc(50% + 88px);top:calc(50% + 67px);">
+            <span style="font-size:1.1rem">📅</span>
+          </div>
+          <!-- Bottom -->
+          <div class="orbit-node" style="left:calc(50% - 21px);bottom:2px;">
+            <span style="font-size:1.1rem">🔗</span>
+          </div>
+          <!-- Bottom-left -->
+          <div class="orbit-node" style="right:calc(50% + 67px);top:calc(50% + 67px);">
+            <span style="font-size:1.1rem">⚡</span>
+          </div>
+          <!-- Left -->
+          <div class="orbit-node" style="left:2px;top:calc(50% - 21px);">
+            <span style="font-size:1.1rem">🎨</span>
+          </div>
+          <!-- Top-left -->
+          <div class="orbit-node" style="right:calc(50% + 67px);top:calc(50% - 88px);">
+            <span style="font-size:1.1rem">📊</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: text -->
+      <div class="col-lg-7">
+        <h2 class="fav-title">Work with Your<br>Favorite Apps Using<br>whitepace</h2>
+        <p class="fav-sub">
+          Whitepace integrates with the apps your team already loves — Slack, Google Drive, GitHub, Figma, Zoom and more. Connect your tools and supercharge your productivity.
+        </p>
+        <a href="#" class="btn-hero">Explore Integrations <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     WHAT OUR CLIENTS SAYS
+══════════════════════════════════ -->
 <section id="testimonials">
   <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6 text-center">
-        <div class="section-eyebrow">Testimonials</div>
-        <h2 class="section-title">Loved by Thousands<br>of Teams Worldwide</h2>
-        <p class="section-sub mx-auto">Don't just take our word for it — here's what our users have to say about Whitepace.</p>
-      </div>
-    </div>
+
+    <h2 class="testi-title">What Our Clients <span class="yellow">Says</span> 🗨️</h2>
+    <p class="testi-sub-center">Whitepace is loved by thousands of teams worldwide.</p>
+
     <div class="row g-4">
 
-      <div class="col-md-6 col-lg-4">
+      <!-- Card 1 — plain -->
+      <div class="col-md-4">
         <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"Whitepace completely transformed how our remote team collaborates. We went from chaotic email threads to crystal-clear projects and deadlines. Best tool we've ever used."</p>
+          <div class="quote-icon">"</div>
+          <p class="testi-text">
+            Whitepace keeps us all connected and productive — no matter where our team is working from. Tasks are clear, deadlines are met and everyone knows what they're responsible for.
+          </p>
           <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)">S</div>
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f97316,#ef4444)">E</div>
             <div>
-              <div class="testi-name">Sarah Mitchell</div>
-              <div class="testi-role">Head of Product, Stripe</div>
+              <div class="testi-name">Eleanor Shaw, MDs</div>
+              <div class="testi-role">Head of Product, Acme Inc.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-4">
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"We tried every PM tool on the market. Whitepace is the only one that the whole team actually adopted and uses daily. The UX is just so intuitive. Set up took less than 30 minutes."</p>
+      <!-- Card 2 — featured (dark) -->
+      <div class="col-md-4">
+        <div class="testi-card featured-t">
+          <div class="quote-icon">"</div>
+          <p class="testi-text">
+            Whitepace keeps us all on the same page and helps us deliver faster than ever. The intuitive interface means there's almost no learning curve — even for our less tech-savvy team members.
+          </p>
           <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#22C55E,#16A34A)">M</div>
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#6366f1,#3b82f6)">M</div>
             <div>
-              <div class="testi-name">Marcus Holloway</div>
-              <div class="testi-role">CTO, Lumen Labs</div>
+              <div class="testi-name">Martin Shaw, MDs</div>
+              <div class="testi-role">CEO, Globex Corporation</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-4">
+      <!-- Card 3 — plain -->
+      <div class="col-md-4">
         <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"The reporting features alone are worth every penny. I can finally show stakeholders exactly where we are on any project in seconds. Whitepace has made me a much better PM."</p>
+          <div class="quote-icon">"</div>
+          <p class="testi-text">
+            Whitepace helps us keep track of work across our whole company — from planning projects to tracking team performance. I can't imagine running our business without it anymore.
+          </p>
           <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">A</div>
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#22c55e,#14b8a6)">D</div>
             <div>
-              <div class="testi-name">Amara Nwosu</div>
-              <div class="testi-role">Project Manager, Notion</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"Onboarding our 50-person engineering team was surprisingly smooth. Whitepace's GitHub integration is seamless — devs can link PRs without leaving their workflow."</p>
-          <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#3B82F6,#6366F1)">J</div>
-            <div>
-              <div class="testi-name">James Okonkwo</div>
-              <div class="testi-role">Engineering Lead, Figma</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"As a freelancer managing multiple clients, Whitepace is a lifesaver. I can switch between client workspaces instantly and never miss a deadline. The free plan is incredibly generous."</p>
-          <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#EC4899,#A855F7)">L</div>
-            <div>
-              <div class="testi-name">Layla Hassan</div>
-              <div class="testi-role">Freelance UX Designer</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"Customer support is second to none. Any question I have gets answered within the hour. The product is great but the team behind it is what really sets Whitepace apart from competitors."</p>
-          <div class="d-flex align-items-center gap-3">
-            <div class="testi-avatar" style="background:linear-gradient(135deg,#14B8A6,#0891B2)">D</div>
-            <div>
-              <div class="testi-name">David Park</div>
-              <div class="testi-role">CEO, CloudBase</div>
+              <div class="testi-name">Daniel Shaw, MDs</div>
+              <div class="testi-role">Operations Manager, Initech</div>
             </div>
           </div>
         </div>
@@ -1317,140 +1500,140 @@
   </div>
 </section>
 
-<!-- ══════════ CTA BANNER ══════════ -->
-<section id="cta-banner">
-  <div class="container" style="position:relative;z-index:2">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-7">
-        <h2 class="cta-title">Start Managing Projects<br>the Smart Way Today</h2>
-        <p class="cta-sub">Join 12,000+ teams who trust Whitepace to deliver their best work. Get started in minutes — no credit card needed.</p>
-      </div>
-      <div class="col-lg-5 d-flex flex-wrap gap-3 justify-content-lg-end">
-        <a href="#" class="btn-cta-white">Get Started Free <i class="bi bi-arrow-right"></i></a>
-        <a href="#" class="btn-cta-outline"><i class="bi bi-play-circle"></i> Watch Demo</a>
-      </div>
+
+<!-- ══════════════════════════════════
+     TRY WHITEPACE TODAY
+══════════════════════════════════ -->
+<section id="try-cta">
+  <div class="container cta-btn-wrap">
+    <h2 class="cta-title">Try Whitepace<br>today</h2>
+    <p class="cta-sub">
+      Get more done for free with all your tools in one place. Start your free trial and experience a smarter way to work.
+    </p>
+    <a href="#" class="btn-hero d-inline-flex">Get Whitepace free <i class="bi bi-arrow-right"></i></a>
+    <p class="or-text">Or a team? <a href="#" style="color:rgba(255,255,255,.65);text-decoration:underline">Switch today</a></p>
+    <div class="platform-icons">
+      <div class="platform-icon"><i class="bi bi-apple"></i></div>
+      <div class="platform-icon"><i class="bi bi-google-play"></i></div>
+      <div class="platform-icon"><i class="bi bi-windows"></i></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
 <footer id="footer">
   <div class="container">
     <div class="row g-5">
-      <!-- Brand col -->
-      <div class="col-lg-4">
-        <div class="footer-brand">white<span>pace</span></div>
-        <p class="footer-desc">The all-in-one project management platform built for modern teams to collaborate, ship, and grow — faster.</p>
-        <div class="mt-4">
-          <a href="#" class="footer-social"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="footer-social"><i class="bi bi-linkedin"></i></a>
-          <a href="#" class="footer-social"><i class="bi bi-github"></i></a>
-          <a href="#" class="footer-social"><i class="bi bi-youtube"></i></a>
+
+      <!-- Brand + desc -->
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-brand d-flex align-items-center gap-2 mb-2">
+          <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+            <rect width="22" height="22" rx="5" fill="#4f8ef7"/>
+            <path d="M6 11l4 4 6-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          whitepace
         </div>
+        <p class="footer-desc">
+          Whitepace was created for the new ways we work. We help teams stay organised and productive.
+        </p>
       </div>
 
       <!-- Product -->
-      <div class="col-6 col-lg-2">
+      <div class="col-6 col-lg-2 col-md-3">
         <div class="footer-heading">Product</div>
-        <a href="#" class="footer-link">Features</a>
-        <a href="#" class="footer-link">Integrations</a>
+        <a href="#" class="footer-link">Overview</a>
         <a href="#" class="footer-link">Pricing</a>
+        <a href="#" class="footer-link">Customer stories</a>
+        <a href="#" class="footer-link">Security</a>
         <a href="#" class="footer-link">Changelog</a>
-        <a href="#" class="footer-link">Roadmap</a>
       </div>
 
-      <!-- Company -->
-      <div class="col-6 col-lg-2">
-        <div class="footer-heading">Company</div>
-        <a href="#" class="footer-link">About</a>
+      <!-- Resources -->
+      <div class="col-6 col-lg-2 col-md-3">
+        <div class="footer-heading">Resources</div>
         <a href="#" class="footer-link">Blog</a>
-        <a href="#" class="footer-link">Careers</a>
-        <a href="#" class="footer-link">Press</a>
-        <a href="#" class="footer-link">Contact</a>
-      </div>
-
-      <!-- Support -->
-      <div class="col-6 col-lg-2">
-        <div class="footer-heading">Support</div>
-        <a href="#" class="footer-link">Help Center</a>
-        <a href="#" class="footer-link">Documentation</a>
+        <a href="#" class="footer-link">Guides &amp; tutorials</a>
+        <a href="#" class="footer-link">Help centre</a>
         <a href="#" class="footer-link">Community</a>
-        <a href="#" class="footer-link">Status</a>
-        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">API</a>
       </div>
 
-      <!-- Newsletter -->
-      <div class="col-6 col-lg-2">
-        <div class="footer-heading">Newsletter</div>
-        <p style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:14px">Get product updates and tips delivered to your inbox.</p>
-        <div class="footer-input-wrap">
-          <input class="footer-input" type="email" placeholder="Your email" />
-          <button class="footer-subscribe">Join</button>
+      <!-- Partners -->
+      <div class="col-6 col-lg-2 col-md-3">
+        <div class="footer-heading">Partners</div>
+        <a href="#" class="footer-link">Partners programme</a>
+        <a href="#" class="footer-link">Integrations</a>
+        <a href="#" class="footer-link">Solutions</a>
+      </div>
+
+      <!-- Try it Today -->
+      <div class="col-md-9 col-lg-3">
+        <div class="footer-heading">Try It Today</div>
+        <p style="font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:14px;line-height:1.6">
+          Get started for free. Add your whole team as your needs grow.
+        </p>
+        <div class="footer-input-wrap mb-3">
+          <input class="footer-input" type="email" placeholder="Enter your email"/>
+          <button class="footer-sub-btn">Join</button>
+        </div>
+        <div class="d-flex gap-3 align-items-center mt-2">
+          <div class="platform-icon" style="width:30px;height:30px;font-size:.9rem;background:rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5)"><i class="bi bi-apple"></i></div>
+          <div class="platform-icon" style="width:30px;height:30px;font-size:.9rem;background:rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5)"><i class="bi bi-google-play"></i></div>
+          <div class="platform-icon" style="width:30px;height:30px;font-size:.9rem;background:rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5)"><i class="bi bi-windows"></i></div>
         </div>
       </div>
+
     </div>
 
-    <hr class="footer-divider" />
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 footer-bottom">
-      <span>&copy; 2026 Whitepace, Inc. All rights reserved.</span>
-      <div class="d-flex gap-4">
-        <a href="#" style="color:rgba(255,255,255,.35);text-decoration:none;font-size:.82rem;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Privacy Policy</a>
-        <a href="#" style="color:rgba(255,255,255,.35);text-decoration:none;font-size:.82rem;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Terms of Service</a>
-        <a href="#" style="color:rgba(255,255,255,.35);text-decoration:none;font-size:.82rem;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Cookie Policy</a>
+    <hr class="footer-divider"/>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <span class="footer-bottom-text">
+        &copy; 2024 Whitepace LLC. &nbsp;·&nbsp;
+        <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none">Terms of Service</a> &nbsp;·&nbsp;
+        <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none">Cookie Settings</a>
+      </span>
+      <div>
+        <a href="#" class="footer-social"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="footer-social"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="footer-social"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="footer-social"><i class="bi bi-instagram"></i></a>
       </div>
     </div>
+
   </div>
 </footer>
 
-<!-- Bootstrap 5 JS -->
+
+<!-- Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-
 <script>
-  /* ── Pricing toggle ── */
-  function togglePricing(plan) {
-    const isYearly = plan === 'yearly';
-    document.getElementById('monthlyBtn').classList.toggle('active', !isYearly);
-    document.getElementById('yearlyBtn').classList.toggle('active', isYearly);
-
-    document.querySelectorAll('.price-val').forEach(el => {
-      el.textContent = isYearly
-        ? el.dataset.yearly
-        : el.dataset.monthly;
-    });
-
-    document.querySelectorAll('.plan-period').forEach(el => {
-      el.textContent = isYearly
-        ? 'per user / month, billed annually'
-        : 'per user / month, billed monthly';
-    });
-  }
-
-  /* ── Navbar shadow on scroll ── */
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    nav.style.boxShadow = window.scrollY > 10
-      ? '0 2px 24px rgba(0,0,0,.08)'
-      : '0 1px 0 rgba(0,0,0,.06)';
-  });
-
-  /* ── Scroll-reveal ── */
-  const reveals = document.querySelectorAll(
-    '.feature-card, .integration-card, .testi-card, .pricing-card, .step-item'
-  );
-  const ro = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
+  /* ── Scroll reveal ── */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.style.opacity = '1';
-        e.target.style.transform = e.target.style.transform.replace('translateY(24px)', 'translateY(0)');
-        ro.unobserve(e.target);
+        e.target.style.transform = e.target.style.transform.includes('translateY')
+          ? e.target.style.transform.replace(/translateY\([^)]+\)/, 'translateY(0)')
+          : e.target.style.transform;
+        obs.unobserve(e.target);
       }
     });
   }, { threshold: 0.1 });
-  reveals.forEach((el, i) => {
+
+  document.querySelectorAll(
+    '#project-mgmt .row, #work-together .row, #customise .row, ' +
+    '.pricing-card, .testi-card, #your-data .row'
+  ).forEach((el, i) => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = `opacity .5s ease ${(i % 3) * 80}ms, transform .5s ease ${(i % 3) * 80}ms, box-shadow .25s, border-color .25s`;
-    ro.observe(el);
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = `opacity .55s ease ${i * 60}ms, transform .55s ease ${i * 60}ms`;
+    obs.observe(el);
   });
 
   /* ── Smooth scroll ── */
@@ -1461,6 +1644,5 @@
     });
   });
 </script>
-
 </body>
 </html>
